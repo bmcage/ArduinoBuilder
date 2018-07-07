@@ -52,15 +52,15 @@ app.post('/compile', function (req, res) {
 						return console.log(err);
 					} else {
 						var outMsg = '';
-						var errMsg = '';						
-				
+						var errMsg = '';
+
 						// Compile sketch
 						//var command = spawn('sh', ['/home/robin/zzzArduinoBuilder/script.sh', sketchName]); // Use this command if you want to run bash script instead of command
-						var command = spawn(BUILDERPATH+'/arduino-builder', ['-compile', '-hardware', BUILDERPATH+'/hardware', '-build-path', buildPath, '-tools', BUILDERPATH+'/hardware/tools', '-tools', BUILDERPATH+'/tools-builder', '-libraries', BUILDERPATH+'/libraries', '-libraries', LOCALARDUINOPATH+'/libraries', '-fqbn', boardName, sketchPath]); 		
+						var command = spawn(BUILDERPATH+'/arduino-builder', ['-compile', '-hardware', BUILDERPATH+'/hardware', '-build-path', buildPath, '-tools', BUILDERPATH+'/hardware/tools', '-tools', BUILDERPATH+'/tools-builder', '-libraries', BUILDERPATH+'/libraries', '-libraries', LOCALARDUINOPATH+'/libraries', '-fqbn', boardName, sketchPath]);
 
 						command.stdout.on('data', function(data) {
-							outMsg += '\n' + data;						
-							//console.log('stdout(' + command.pid + '): ' + data);	
+							outMsg += '\n' + data;
+							//console.log('stdout(' + command.pid + '): ' + data);
 						});
 
 						command.stderr.on('data', function(data) {
@@ -71,23 +71,27 @@ app.post('/compile', function (req, res) {
 						command.on('close', function(code) {
 							if (code === 0) {
 								fs.readFile(buildPath+'/'+sketchName+'.ino.hex', 'utf8', function(err, data) {
-									//console.log('close(' + command.pid + '): Sending hex as response');					
+									//console.log('close(' + command.pid + '): Sending hex as response');
 									res.writeHead(200, {'Content-Type': 'application/json'});
 									res.write(JSON.stringify({'hex':data, 'out':outMsg, 'err':errMsg}));
 									res.end();
-								});	
+								});
 							} else {
-								res.sendStatus(500); // Server error
+							    console.log("Error on close, code: ", code)
+                                res.writeHead(200, {'Content-Type': 'application/json'});
+                                res.write(JSON.stringify({'hex':'', 'out':outMsg, 'err':errMsg}));
+                                res.end();
+								//res.sendStatus(500); // Server error
 							}
 							// Delete tmp folder and sketch to save space
 							rimraf(mainBuildPath, function(){
 								console.log('cleared dir(' + command.pid + ')');
 							});
-						});	
+						});
 					}
-				});	
+				});
 			}
-		});		
+		});
 	} else {
 		res.writeHead(200, {'Content-Type': 'application/json'});
 		res.write(JSON.stringify({'err':'Empty JSON request send from client'}));
