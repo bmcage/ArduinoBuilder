@@ -79,7 +79,7 @@ app.post('/compile', function (req, res) {
                             } else {
                                 console.log("Error on close, code: ", code)
                                 res.writeHead(200, {'Content-Type': 'application/json'});
-                                res.write(JSON.stringify({'hex':'', 'out':outMsg, 'err':errMsg}));
+                                res.write(JSON.stringify({'hex':'', 'out':outMsg, 'err':errMsg + '\n Error during Compile!' }));
                                 res.end();
                                 //res.sendStatus(500); // Server error
                             }
