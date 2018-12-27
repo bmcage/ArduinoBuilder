@@ -4,7 +4,7 @@ Compile your sketches or build your project and return .hex-file of requested co
 This project uses the arduino-builder tool used by the Arduino IDE. 
 
 ### Requirements
- - Linux or Ubuntu OS (Host or VM);
+ - Linux or Ubuntu OS or Chrome OS (Host or VM);
  - Node.js installed (https://nodejs.org/en/download/);
  - npm installed (if not installed with Node.js);
  - Latest version of the Arduino IDE installed (https://www.arduino.cc/en/Main/Software).
@@ -13,7 +13,7 @@ This project uses the arduino-builder tool used by the Arduino IDE.
  - Download or clone following GitHub-directory: https://github.com/RMeurisse/ArduinoBuilder;
  - ```cd``` to downloaded directory;
  - Run ```(sudo) npm install``` in the current directory. This will install all dependencies specified in the manifest.json-file;
- - Change the file 'config.js' to specify your local paths and variables:
+ - Save the file 'config.js.in' as 'config.js' and change it then to specify your local paths and variables:
  	- Local './arduino-directory': this directory will contain the extra libraries you downloaded with the Arduino IDE;
 	- Local './arduino-1.8.5-directory': this directory contains all the files used by the arduino-builder tool;
 	- Local 'temporary'-directory: this is the directory where the arduino-builder tool will store it's temporary files, this can be a directory you created or you can use the '/tmp'-directory of Linux/Ubuntu.
