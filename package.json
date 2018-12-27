@@ -1,7 +1,8 @@
-{ "dependencies" :
-  { "express" : "*"
-  , "body-parser" : "*"
-  , "cors" : "*"
-  , "rimraf" : "*"
+{
+  "dependencies": {
+    "express": "*",
+    "body-parser": "*",
+    "cors": "*",
+    "rimraf": "*"
   }
 }
