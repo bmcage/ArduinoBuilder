@@ -10,7 +10,7 @@ This project uses the arduino-builder tool used by the Arduino IDE.
  - Latest version of the Arduino IDE installed (https://www.arduino.cc/en/Main/Software).
 
 ### Setting up the server
- - Download or clone following GitHub-directory: https://github.com/RMeurisse/ArduinoBuilder;
+ - Download or clone following GitHub-directory: https://github.com/bmcage/ArduinoBuilder;
  - ```cd``` to downloaded directory;
  - Run ```(sudo) npm install``` in the current directory. This will install all dependencies specified in the manifest.json-file;
  - Save the file 'config.js.in' as 'config.js' and change it then to specify your local paths and variables:
