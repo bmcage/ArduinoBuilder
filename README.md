@@ -13,10 +13,10 @@ This project uses the arduino-builder tool used by the Arduino IDE.
  - Download or clone following GitHub-directory: https://github.com/bmcage/ArduinoBuilder;
  - ```cd``` to downloaded directory;
  - Run ```(sudo) npm install``` in the current directory. This will install all dependencies specified in the manifest.json-file;
- - Save the file 'config.js.in' as 'config.js' and change it then to specify your local paths and variables:
- 	- Local './arduino-directory': this directory will contain the extra libraries you downloaded with the Arduino IDE;
-	- Local './arduino-1.8.5-directory': this directory contains all the files used by the arduino-builder tool;
-	- Local 'temporary'-directory: this is the directory where the arduino-builder tool will store it's temporary files, this can be a directory you created or you can use the '/tmp'-directory of Linux/Ubuntu.
+ - Save the file ```config.js.in``` as ```config.js``` and change it then to specify your local paths and variables:
+ 	- Local ```config.localArduinoPath```: this directory will contain the extra libraries you downloaded with the Arduino IDE; Typically your home directory + Arduino.
+	- Local ```config.builderPath```: this directory contains all the files used by the arduino-builder tool, so the location of your local Arduino IDE install;
+	- Local ```config.localBuildPath```: this is the directory where the arduino-builder tool will store it's temporary files, this can be a directory you created or you can use the '/tmp'-directory of Linux/Ubuntu.
  - Run ```(sudo) node server.js```;
  - Go to: ```http://localhost:{Port}/```. With {Port} being the port specified in the 'config.js'-file;
  - Write your code in the textbox and verify your code or upload it directly to a connected Arduino board;
