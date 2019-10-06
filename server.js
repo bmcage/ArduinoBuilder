@@ -56,7 +56,20 @@ app.post('/compile', function (req, res) {
 
                         // Compile sketch
                         //var command = spawn('sh', ['/home/robin/zzzArduinoBuilder/script.sh', sketchName]); // Use this command if you want to run bash script instead of command
-                        var command = spawn(BUILDERPATH+'/arduino-builder', ['-compile', '-hardware', BUILDERPATH+'/hardware', '-build-path', buildPath, '-tools', BUILDERPATH+'/hardware/tools', '-tools', BUILDERPATH+'/tools-builder', '-libraries', BUILDERPATH+'/libraries', '-libraries', LOCALARDUINOPATH+'/libraries', '-fqbn', boardName, sketchPath]);
+                        var command = spawn(BUILDERPATH+'/arduino-builder', 
+                               ['-compile', 
+                                '-hardware', BUILDERPATH+'/hardware', 
+                                '-build-path', buildPath, 
+                                '-tools', BUILDERPATH +'/hardware/tools/avr', // compiler avr-g++ and friends
+                                '-tools', BUILDERPATH+'/hardware/tools', 
+                                '-tools', BUILDERPATH+'/tools-builder',       // location of ctags
+                                '-libraries', LOCALARDUINOPATH+'/libraries',    
+                                '-built-in-libraries', BUILDERPATH+'libraries', 
+                                '-fqbn', boardName, 
+                                //'-verbose',
+                                //'-trace',  
+                                sketchPath
+                               ]);
 
                         command.stdout.on('data', function(data) {
                             outMsg += '\n' + data;
